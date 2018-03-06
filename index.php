@@ -2,20 +2,27 @@
 
 
 define('DS', DIRECTORY_SEPARATOR);
-define('ROOT', realpath(dirname(__FILE__)) . DS);
 // definimos la ruta raíz de la app
+define('ROOT', realpath(dirname(__FILE__)) . DS);
+
 define('APP_PATH', ROOT . 'application' . DS);
 
-
+// lo probamos
+// echo(ROOT);
 
 // incluimos archivos
 require_once APP_PATH . 'Config.php';
+require_once APP_PATH . 'Controller.php';
 require_once APP_PATH . 'Request.php';
 require_once APP_PATH . 'Bootstrap.php';
 
 
 // llamamos al método run de la clase Bootstrap
-Bootstrap::run(new Request);
+// en caso de error, le pasamos un mensaje
+try {
+   Bootstrap::run(new Request);	
+} catch (Exception $e) {
+	echo($e->getMessage());
+}
 
-
- ?>
+?>
