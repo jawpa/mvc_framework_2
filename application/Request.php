@@ -60,9 +60,9 @@ class Request{
           return $this->metodo;	
     }
 
-    public function getAtributos()
+    public function getArgumentos()
     {
-          return $this->atributos;	
+          return $this->argumentos;	
     }
 }
 ?>

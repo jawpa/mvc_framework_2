@@ -12,12 +12,7 @@ define('APP_PATH', ROOT . 'application' . DS);
 
 // incluimos archivos
 require_once APP_PATH . 'Config.php';
-require_once APP_PATH . 'Controller.php';
-require_once APP_PATH . 'Model.php';
-require_once APP_PATH . 'Registro.php';
 require_once APP_PATH . 'Request.php';
-require_once APP_PATH . 'View.php';
-require_once APP_PATH . 'Bootstrap.php';
 
 // lo probamos las filas incluidas y requeridas
 // echo "<pre>"; print_r(get_required_files());
