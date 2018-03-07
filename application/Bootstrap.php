@@ -1,3 +1,4 @@
+
 <?php 
 class Bootstrap{
 
@@ -9,26 +10,34 @@ class Bootstrap{
    	    // almacena la ruta del controlador 
    	    $rutaController = ROOT . "controllers" . DS . $controller . ".php";
    
-        // si se puede leer
+        // obtenemos el método de la petición
+        $method = $peticion->getMetodo();
+
+
+        // verificamos si es accesible la ruta del controlador
         if (is_readable($rutaController)) {
-        	// requerimos la ruta
+        	// lo requerimos
         	require_once $rutaController;
-            
-            // llamamos al método
-            if (is_callable(array($controller,$method))) {
+            // instanciamos al controlador, con lo cual llamamos a su constructor
+            // habilita el uso de vista/modelo en la url
+         	$controller = new $controller;
+
+            // verifico si envíe un mértodo válido
+        	if (is_callable(array($controller,$method))) {
         		
         		$method = $peticion->getMetodo();
         	}
         	else{
-                // si no es válido, definimos un método index
+                // si no es válido, envío un index
                 $method = 'index';   
         	}
 
-            call_user_func(array($controller,$method));
         	
-        
+        	// llamamos a la clase y al método
+        	call_user_func(array($controller,$method));
+        	
         }
-        // si la ruta del controlador no se puede leer
+        // si el archivo del controlador no es válido
         else{
         	// lanzamos una excepción
             throw new Exception("Controlador no encontrado");
